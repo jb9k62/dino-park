@@ -17,6 +17,7 @@ export default class Dino {
   }
 
   feed(dateTime) {
+    console.log(`${this.name} ${dateTime}`);
     this.lastFed = new Date(dateTime);
   }
 
@@ -26,8 +27,13 @@ export default class Dino {
       return false;
     }
 
+    if (this.lastFed.getTime() > new Date().getTime()) {
+      console.debug(`Dino ${this.name} is fed ahead of current date time...`);
+      return true;
+    }
+
     const isDigesting =
-      new Date().getTime() >
+      new Date().getTime() <
       this.lastFed.setTime(
         this.lastFed.getTime() + this.digestionInHours * 60 * 60 * 1000
       );
@@ -40,5 +46,8 @@ export default class Dino {
       );
       return true;
     }
+
+    console.debug(`Dino ${this.name} is not digesting...`);
+    return false;
   }
 }
