@@ -18,6 +18,14 @@
   height: 50px;
 }
 
+.safe {
+  background-color: green;
+}
+
+.danger {
+  background-color: red;
+}
+
 
 
 
