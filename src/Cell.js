@@ -1,7 +1,6 @@
 export default class Cell {
   identifier = null;
   lastMaintained = null;
-  nextMaintenance = null;
   dinosInCell = new Map();
 
   constructor(identifier) {
@@ -10,14 +9,12 @@ export default class Cell {
 
   setLastMaintained(dateTime) {
     this.lastMaintained = dateTime;
-    this._calcNextMaintenance();
   }
 
-  _calcNextMaintenance() {
+  // TODO: some inconsistency in properties for dates. use Date type, not string.
+  needsMaintenance() {
     const lastMaintained = new Date(this.lastMaintained);
-    this.nextMaintenance = lastMaintained.setDate(
-      lastMaintained.getDate() + 30
-    );
+    return lastMaintained.setDate(lastMaintained.getDate() + 30) < new Date();
   }
 
   addDino(dino) {
@@ -39,17 +36,5 @@ export default class Cell {
     );
 
     return anyDigesting;
-
-    // safe when
-    /*
-     * no dino
-     * if dino
-     *   dino is digesting
-     * */
-    // this.dinosInCell;
-  }
-
-  maintain() {
-    return new Date().toISOString().localeCompare(this.lastMaintained);
   }
 }

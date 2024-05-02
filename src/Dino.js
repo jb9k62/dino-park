@@ -23,20 +23,19 @@ export default class Dino {
 
   isDigesting() {
     if (!this.lastFed) {
-      console.debug(`Dino ${this.name} has never beed fed`);
+      console.info(`Dino ${this.name} has never beed fed`);
       return false;
     }
 
     if (this.lastFed.getTime() > new Date().getTime()) {
-      console.debug(`Dino ${this.name} is fed ahead of current date time...`);
+      console.info(`Dino ${this.name} is fed ahead of current date time...`);
       return true;
     }
 
+    // dino is digesting if current time is less than lastFed + digestionInHours(ms)
     const isDigesting =
       new Date().getTime() <
-      this.lastFed.setTime(
-        this.lastFed.getTime() + this.digestionInHours * 60 * 60 * 1000
-      );
+      this.lastFed.getTime() + (this.digestionInHours * 60 * 60 * 1000);
 
     if (isDigesting) {
       console.debug(

@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     fetchEvents()
+      // sort events by time for chronological processing
       .then((events) => events.sort((a, b) => a.time.localeCompare(b.time)))
       .then((events) => setEvents(events));
   }, []);
@@ -23,19 +24,31 @@ function App() {
     setPark(process(events));
   }, [events]);
 
+  window.PARK = park;
+
   return (
     <>
       <div className="container">
-        {park.grid?.map((col) =>
-          col.map((cell, index) => {
-            const isSafe = cell.safe();
-            return (
-              <div key={index} className={`box ${isSafe ? "safe" : "danger"}`}>
-                {JSON.stringify()}
-              </div>
-            );
-          })
-        )}
+        {/* TODO: A-Z & 1-16 lettering around cells */}
+        {park.grid?.map((col) => (
+          <div>
+            {col.map((cell, index) => {
+              const isSafe = cell.safe();
+              const needsMaintenance = cell.needsMaintenance();
+              return (
+                <div
+                  key={index}
+                  className={`box ${isSafe ? "safe" : "danger"}`}
+                >
+                  <span>{cell.identifier}</span>
+                  {needsMaintenance ? (
+                    <img src="dino-parks-wrench.png" style={{ width: "50%" }} />
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
       <div className="App">{JSON.stringify(events)}</div>
     </>

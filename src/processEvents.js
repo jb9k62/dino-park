@@ -22,14 +22,12 @@ export default function process(events) {
         break;
 
       case "dino_fed":
+        console.log(`Dino fed: ${event.dinosaur_id} at ${event.time}`)
         dinos.get(event.dinosaur_id).feed(event.time);
         break;
 
       case "dino_location_updated":
         console.log("dino_location_updated", event);
-
-        // find Dinos current location, remove it.
-        // add Dino to new cell.
         park.grid.flat().forEach((cell) => cell.removeDino(event.dinosaur_id));
         park
           .cellByLocation(event.location)
@@ -37,10 +35,22 @@ export default function process(events) {
 
         break;
 
+      case "dino_removed":
+        console.log("dino_removed", event);
+        // FIXME: suboptimal. instead of searching over the array, maintain a map of dinos to cells
+        park.grid.flat().forEach((cell) => cell.removeDino(event.dinosaur_id));
+        break;
+
+      case "maintenance_performed":
+        console.log("maintenance_performed", event);
+        park
+          .cellByLocation(event.location)
+          .setLastMaintained(event.time);
+        break;
+
       default:
         break;
     }
   }
-  console.log("Returning park", park);
   return park;
 }
