@@ -24,17 +24,20 @@ export function ParkGrid({ park, onCellClick, selectedCell }) {
 
       {/* Grid rows with row labels */}
       <div className="grid-with-rows">
-        {park.grid.map((col, colIndex) => (
-          <div key={`row-${colIndex}`} className="grid-row">
-            <div className="row-header">{rowLabels[colIndex]}</div>
-            {col.map((cell) => (
-              <Cell
-                key={cell.identifier}
-                cell={cell}
-                onClick={() => onCellClick(cell)}
-                isSelected={selectedCell?.identifier === cell.identifier}
-              />
-            ))}
+        {rowLabels.map((rowLabel, rowIndex) => (
+          <div key={`row-${rowIndex}`} className="grid-row">
+            <div className="row-header">{rowLabel}</div>
+            {columnLabels.map((_, colIndex) => {
+              const cell = park.grid[colIndex][rowIndex];
+              return (
+                <Cell
+                  key={cell.identifier}
+                  cell={cell}
+                  onClick={() => onCellClick(cell)}
+                  isSelected={selectedCell?.identifier === cell.identifier}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
