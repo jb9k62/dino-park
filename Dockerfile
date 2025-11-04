@@ -26,5 +26,5 @@ EXPOSE 3000
 
 # Serve the dist folder on port 3000
 # -s flag enables single-page app mode (serves index.html for all routes)
-# -l flag sets the port
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# -l flag sets the listen address and port (must bind to 0.0.0.0 for Fly.io)
+CMD ["serve", "-s", "dist", "-l", "tcp://0.0.0.0:3000"]
