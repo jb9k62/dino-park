@@ -11,7 +11,7 @@ export function Cell({ cell, onClick, isSelected }) {
 
   return (
     <div
-      className={`box ${isSafe ? 'safe' : 'danger'} ${isSelected ? 'selected' : ''}`}
+      className={`box ${isSafe ? 'safe' : 'danger'} ${isSelected ? 'selected' : ''} ${cell.hidden ? 'hidden' : ''}`}
       onClick={onClick}
       role="button"
       tabIndex={0}

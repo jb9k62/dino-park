@@ -143,6 +143,10 @@
   background-color: #e74c3c;
 }
 
+.box.hidden {
+  display: none;
+}
+
 .cell-identifier {
   font-size: 0.75rem;
   font-weight: bold;

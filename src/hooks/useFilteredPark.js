@@ -24,47 +24,45 @@ export function useFilteredPark(park, filters) {
       return park;
     }
 
-    // Create new park with filtered cells
-    let filteredPark = createPark();
+    // Create new park with filtered cells marked as hidden
+    const filteredPark = {
+      ...park,
+      grid: park.grid.map((col) =>
+        col.map((cell) => {
+          let shouldInclude = true;
 
-    // Apply filters to each cell
-    park.grid.forEach((col, colIndex) => {
-      col.forEach((cell, rowIndex) => {
-        let shouldInclude = true;
-
-        // Apply dangerous filter
-        if (filters.showOnlyDangerous && isCellSafe(cell)) {
-          shouldInclude = false;
-        }
-
-        // Apply maintenance filter
-        if (filters.showOnlyNeedsMaintenance && !cellNeedsMaintenance(cell)) {
-          shouldInclude = false;
-        }
-
-        // Apply occupied filter
-        if (filters.showOnlyOccupied && cell.dinos.length === 0) {
-          shouldInclude = false;
-        }
-
-        // Apply dino search filter
-        if (filters.dinoSearch) {
-          const searchLower = filters.dinoSearch.toLowerCase();
-          const hasDinoMatch = cell.dinos.some(dino =>
-            dino.name.toLowerCase().includes(searchLower) ||
-            dino.species.toLowerCase().includes(searchLower)
-          );
-          if (!hasDinoMatch) {
+          // Apply dangerous filter
+          if (filters.showOnlyDangerous && isCellSafe(cell)) {
             shouldInclude = false;
           }
-        }
 
-        // Update cell in filtered park
-        if (shouldInclude) {
-          filteredPark = updateCell(filteredPark, cell.identifier, cell);
-        }
-      });
-    });
+          // Apply maintenance filter
+          if (filters.showOnlyNeedsMaintenance && !cellNeedsMaintenance(cell)) {
+            shouldInclude = false;
+          }
+
+          // Apply occupied filter
+          if (filters.showOnlyOccupied && cell.dinos.length === 0) {
+            shouldInclude = false;
+          }
+
+          // Apply dino search filter
+          if (filters.dinoSearch) {
+            const searchLower = filters.dinoSearch.toLowerCase();
+            const hasDinoMatch = cell.dinos.some(dino =>
+              dino.name.toLowerCase().includes(searchLower) ||
+              dino.species.toLowerCase().includes(searchLower)
+            );
+            if (!hasDinoMatch) {
+              shouldInclude = false;
+            }
+          }
+
+          // Mark cell as hidden if it doesn't match filters
+          return shouldInclude ? cell : { ...cell, hidden: true };
+        })
+      )
+    };
 
     return filteredPark;
   }, [park, filters]);
