@@ -30,11 +30,11 @@ export default class Cell {
       return true;
     }
 
-    // check if any of the dinos are not digesting
-    const anyDigesting = Array.from(this.dinosInCell.values()).some((dino) =>
+    // Cell is safe only if ALL dinos are digesting
+    const allDigesting = Array.from(this.dinosInCell.values()).every((dino) =>
       dino.isDigesting()
     );
 
-    return anyDigesting;
+    return allDigesting;
   }
 }

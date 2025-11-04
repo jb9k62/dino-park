@@ -58,10 +58,6 @@ export default class Park {
   }
 
   cellByLocation(location) {
-    console.log(location, getCharsAlphabetIndex(location.substring(0, 1)), this.grid[getCharsAlphabetIndex(location.substring(0, 1))][
-      Number(location.substring(1)) - 1
-    ]);
-
     return this.grid[getCharsAlphabetIndex(location.substring(0, 1))][
       Number(location.substring(1)) - 1
     ];
