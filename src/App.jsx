@@ -54,6 +54,12 @@ function ParkContainer() {
     <div className="app-container">
       <header className="app-header">
         <h1>🦕 Dino Park Management System</h1>
+        <div className="app-description">
+          <p><strong>Real-time event-driven park monitoring.</strong> Fetches persistent event log from external API, processes 5 event types chronologically (dino_added, dino_fed, dino_location_updated, dino_removed, maintenance_performed), renders 26×16 grid (416 cells) with live safety status.</p>
+          <p><strong>Features:</strong> Dynamic safety calculation (cell safe if empty OR all dinos digesting), 30-day maintenance tracking, multi-filter system (danger/maintenance/occupancy/dino name search), cell details panel showing occupants and maintenance status.</p>
+          <p><strong>Portfolio value:</strong> Demonstrates event sourcing, pure functional programming with immutable data structures, separation of concerns (domain/hooks/components/utils), comprehensive test coverage, API integration, complex filtering logic.</p>
+          <p><strong>Stack:</strong> React 18 + Vite, custom hooks (useParkEvents for API, useParkState for event processing, useFilteredPark for filters, useParkStatistics for metrics), pure functional domain layer (park/cell/dino modules), utility modules (constants/coordinates/dates), Node test runner, error boundaries, CSS Grid layout.</p>
+        </div>
       </header>
 
       <div className="app-layout">
