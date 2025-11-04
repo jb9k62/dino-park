@@ -144,7 +144,8 @@
 }
 
 .box.hidden {
-  display: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .cell-identifier {
