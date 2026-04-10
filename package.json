@@ -22,12 +22,12 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
-    "@vitejs/plugin-react": "^2.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.0.6",
     "@vitest/ui": "^4.0.6",
     "jsdom": "^27.1.0",
     "msw": "^2.11.6",
-    "vite": "^3.2.3",
+    "vite": "^8.0.8",
     "vitest": "^4.0.6"
   }
 }
