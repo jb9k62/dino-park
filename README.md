@@ -2,6 +2,10 @@
 
 Event-sourced dinosaur park management system demonstrating pure functional programming in React.
 
+**Live app:** https://dino-park.fly.dev/
+
+![Dino Park: park statistics, the 26×16 grid, and the details panel for a dangerous cell](docs/screenshot.png)
+
 ## What This Is
 
 Real-world demonstration of:
